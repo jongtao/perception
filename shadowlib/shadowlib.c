@@ -4,6 +4,8 @@
 #include <lauxlib.h>
 #include <lualib.h>
 
+#include "shadow.h"
+
 static int ctrig_shadow(lua_State *L)
 {
 	printf("asdf\n");

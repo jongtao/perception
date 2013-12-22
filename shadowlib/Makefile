@@ -1,22 +1,32 @@
-# This does not work yet
-
 # Includes
-INCS= `pkg-config --libs --static lua5.2`
+INCS= -I/usr/include/lua5.2 -llua5.2
 
 # Compiling options
 CC= gcc
-CFLAGS= $(INCS) $(WARN) -fPIC
+CFLAGS= $(INCS) $(WARN) -O2 -fPIC
 WARN= -std=c99 -pedantic -Wall -Wextra
-CFLAGS= $(INCS)
 MAKESO= $(CC) -shared
 
-# Testing
+# Files
 TEST= test.lua
+OBJS= shadowlib.o shadow.o
+LIB= shadowlib.so
 
+# Rules
 all: test
 
-test: shadowlib.so
+test: $(LIB)
 	lua $(TEST)
 
-shadowlib.so: $(OBJS)
+o: $(OBJS)
+
+so: $(LIB)
+
+$(LIB): $(OBJS)
 	$(MAKESO) -o $@ $(OBJS)
+
+.PHONY: clean
+
+clean: 
+	rm -f $(OBJS) $(LIB) core core.*
+
