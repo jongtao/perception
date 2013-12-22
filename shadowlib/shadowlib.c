@@ -8,7 +8,8 @@
 
 static int ctrig_shadow(lua_State *L)
 {
-	printf("asdf\n");
+	int n = lua_gettop(L);
+	printf("C Function received %d arguments.\n", n);
 	return 0;
 } // trig_shadow
 
